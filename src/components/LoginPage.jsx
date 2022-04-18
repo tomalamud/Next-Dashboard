@@ -5,8 +5,8 @@ export default function LoginPage() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const submitHandler = () => {
-    event.preventDefault();
+  const submitHandler = (event) => {
+    event.preventDefault(); // evita que el comportamiento default del form (enviar a una url)
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
