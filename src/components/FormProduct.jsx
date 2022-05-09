@@ -1,6 +1,8 @@
 import { useRef } from 'react';
+import { addProduct } from '@services/api/products';
+import { responseSymbol } from 'next/dist/server/web/spec-compliant/fetch-event';
 
-export default function FormProduct() {
+export default function FormProduct({ setOpen, setAlert }) {
   const formRef = useRef(null);
 
   const handleSubmit = (event) => {
@@ -13,7 +15,23 @@ export default function FormProduct() {
       categoryId: parseInt(formData.get('category')),
       images: [formData.get('images').name],
     };
-    console.log(data);
+    addProduct(data).then(res => {
+      console.log(res)
+      setAlert({
+        active: true,
+        message: 'Product added succesfully',
+        type: 'success',
+        autoClose: false,
+      });
+      setOpen(false);
+    }).catch((err) => {
+      setAlert({
+        active: true,
+        message: err.message,
+        type: 'error',
+        autoClose: false,
+      });
+    });
   };
 
   return (
