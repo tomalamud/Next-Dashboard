@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { addProduct } from '@services/api/products';
-import { responseSymbol } from 'next/dist/server/web/spec-compliant/fetch-event';
 
 export default function FormProduct({ setOpen, setAlert }) {
   const formRef = useRef(null);
